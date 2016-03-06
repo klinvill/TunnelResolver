@@ -53,7 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
             newLi.appendChild(createTunnelText(source, target));
 
             // add a delete button for each listed tunnel
-            var deleteButton = document.createElement("button").appendChild(document.createTextNode("delete"));
+            var deleteButton = document.createElement("button");
+            deleteButton.appendChild(document.createTextNode("delete"));
             newLi.appendChild(deleteButton);
             deleteButton.addEventListener('click', function () {
                 removeTunnel(source);
