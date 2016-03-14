@@ -14,8 +14,10 @@ function addTunnel(source, target) {
     var targetURL;
 
     // appends http:// if needed to get a valid url
-    if (!(source.substring(0,7)=="http://" || source.substring(0,8)=="https://")) sourceURL = "http://".concat(source);
-    if (!(target.substring(0,7)=="http://" || target.substring(0,8)=="https://")) targetURL = "http://".concat(target);
+    if (source.substring(0,7)!=="http://" && source.substring(0,8)!=="https://") sourceURL = "http://".concat(source);
+    else sourceURL = source;
+    if (target.substring(0,7)!=="http://" && target.substring(0,8)!=="https://") targetURL = "http://".concat(target);
+    else targetURL = target;
 
     var sourceParser = new URL(sourceURL);
     var targetParser = new URL(targetURL);
