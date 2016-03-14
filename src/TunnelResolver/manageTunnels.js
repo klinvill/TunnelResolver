@@ -24,9 +24,7 @@ function addTunnel(source, target) {
 
     // Add source and target mapping to the lookupTable
     chrome.storage.local.get(LOOKUP_TABLE, function(results) {
-        var lookupTable;
-        if (Object.keys(results).length === 0) lookupTable = {};
-        else lookupTable = results[LOOKUP_TABLE];
+        var lookupTable = results[LOOKUP_TABLE] || {};
 
         lookupTable[sourceParser.host] = targetParser.host;
 
