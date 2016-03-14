@@ -48,12 +48,25 @@ You can install this extension either from the crx file in the deploy directory 
 
 2. Click the delete button next to the tunnel you want to delete
 
-
-
-
-
 #### Using the tunnels you set up
 1.  You're done! The redirecting takes care of all the work for you.It's important to note that only the host is replaced. So if you type in foo/1, you'll be redirected to bar/1, even if bar/1 is an invalid URL. 
+
+For a quick example of redirection, setup www.apple.com as a source and www.google.com as the target. Then navigate to www.apple.com and you'll be taken to www.google.com.
+
+![](instructions/apple_url.png)  
+![](instructions/google_url.png)
+
+As a bonus, we can setup up redirection between multiple hosts. So for example we can add google as a source and teradata as a target, then navigating to www.apple.com will end up redirecting you to www.teradata.com!
+
+![](instructions/teradata_url.png)
+
+
+
+
+
+
+
+
 
 ## Sample usage: Hadoop Resource UI Tunnel Resolution
 One good use case for this browser extension (and the reason I created it in the first place) is for resolving UIs of multi-node systems you don't have direct access to. 
