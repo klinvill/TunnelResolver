@@ -8,22 +8,19 @@ function newTunnel() {
     addTunnel(source, target);
 }
 
+function buildUrl (url) {
+    var FQUrl; // fully-qualified url, protocol required for parsing reasons
+    // Currently only http and https protocol urls are parsed
+    if (url.substring(0,7)!=="http://" && url.substring(0,8)!=="https://") FQUrl = "http://".concat(url);
+    else FQUrl = url;
+
+    return new URL(FQUrl);
+}
+
 function addTunnel(source, target) {
 
-    var sourceURL;
-    var targetURL;
-
-    // appends http:// if needed to get a valid url
-    if (source.substring(0,7)!=="http://" && source.substring(0,8)!=="https://") sourceURL = "http://".concat(source);
-    else sourceURL = source;
-    if (target.substring(0,7)!=="http://" && target.substring(0,8)!=="https://") targetURL = "http://".concat(target);
-    else targetURL = target;
-
-    var sourceParser = new URL(sourceURL);
-    var targetParser = new URL(targetURL);
-
-    var sourceHost = sourceParser.host;
-    var targetHost = targetParser.host;
+    var sourceParser = buildUrl(source);
+    var targetParser = buildUrl(target);
 
     // Add source and target mapping to the lookupTable
     chrome.storage.local.get(LOOKUP_TABLE, function(results) {
@@ -31,7 +28,9 @@ function addTunnel(source, target) {
         if (Object.keys(results).length === 0) lookupTable = {};
         else lookupTable = results[LOOKUP_TABLE];
 
-        lookupTable[sourceHost] = targetHost;
+        lookupTable[sourceParser.host] = targetParser.host;
+
+        // { LOOKUP_TABLE: val } will use LOOKUP_TABLE as the key instead of using the value of LOOKUP_TABLE as the key, so the workaround is to use object[LOOKUP_TABLE] = val
         var value = {};
         value[LOOKUP_TABLE] = lookupTable;
         chrome.storage.local.set(value);
@@ -43,6 +42,8 @@ function removeTunnel(sourceHost) {
         var lookupTable = results[LOOKUP_TABLE];
         // Delete mapping from the lookupTable
         delete lookupTable[sourceHost];
+
+        // { LOOKUP_TABLE: val } will use LOOKUP_TABLE as the key instead of using the value of LOOKUP_TABLE as the key, so the workaround is to use object[LOOKUP_TABLE] = val
         var storedTable = {};
         storedTable[LOOKUP_TABLE] = lookupTable;
         chrome.storage.local.set(storedTable);
