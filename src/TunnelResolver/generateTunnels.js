@@ -36,19 +36,24 @@ document.addEventListener('DOMContentLoaded', function() {
     chrome.storage.local.get(LOOKUP_TABLE, function(results) {
         var lookupTable = results[LOOKUP_TABLE];
         if (lookupTable) {
-            document.getElementById("sshLocalCommands").addEventListener('click', function() {
-                var command = document.createElement("div");
-                command.className="boxed";
+            document.getElementById("generateSSHLocalCommands").addEventListener('click', function() {
+                const commandId = "sshCommands";
 
-                var title = document.createElement("b");
-                title.appendChild(document.createTextNode("SSH Command:"));
+                if (!document.getElementById(commandId)) {
+                    var command = document.createElement("div");
+                    command.className = "boxed";
+                    command.id = commandId;
 
-                var text = document.createElement("p");
-                text.appendChild(document.createTextNode(formatSSHCommand(lookupTable, "localhost")));
+                    var title = document.createElement("b");
+                    title.appendChild(document.createTextNode("SSH Command:"));
 
-                command.appendChild(title);
-                command.appendChild(text);
-                document.getElementById("currentTunnels").parentNode.appendChild(command);
+                    var text = document.createElement("p");
+                    text.appendChild(document.createTextNode(formatSSHCommand(lookupTable, "localhost")));
+
+                    command.appendChild(title);
+                    command.appendChild(text);
+                    document.getElementById("currentTunnels").parentNode.appendChild(command);
+                }
             });
         }
     });
