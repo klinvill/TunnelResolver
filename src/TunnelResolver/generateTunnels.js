@@ -2,6 +2,8 @@
  * Created by Kirby on 3/12/16.
  */
 
+if (!window.LOOKUP_TABLE) window.LOOKUP_TABLE = "lookupTable";
+
 function formatTunnelCommand(sourcePort, targetHostname, targetPort) {
     return "-L "+sourcePort+":"+targetHostname+":"+targetPort;
 }

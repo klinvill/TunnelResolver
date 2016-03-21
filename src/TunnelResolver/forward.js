@@ -1,5 +1,5 @@
 // Map from source host to target host
-const LOOKUP_TABLE = "lookupTable";
+if (!window.LOOKUP_TABLE) window.LOOKUP_TABLE = "lookupTable";
 var lookupTable;
 
 chrome.storage.local.get(LOOKUP_TABLE, function(results) { lookupTable = results[LOOKUP_TABLE] });

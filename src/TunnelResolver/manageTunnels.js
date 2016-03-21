@@ -1,6 +1,6 @@
 // name of the lookup table in chrome.storage.local
 // state is persisted across sessions, tabs, and popups using chrome.storage.local
-if(!LOOKUP_TABLE) const LOOKUP_TABLE = "lookupTable";
+if (!window.LOOKUP_TABLE) window.LOOKUP_TABLE = "lookupTable";
 
 function newTunnel() {
     var source = document.getElementById("src").value;
