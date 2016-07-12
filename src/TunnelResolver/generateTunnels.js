@@ -3,6 +3,7 @@
  */
 
 if (!window.LOOKUP_TABLE) window.LOOKUP_TABLE = "lookupTable";
+if (!window.TR_CURRENT_PROFILE) window.TR_CURRENT_PROFILE = $('.nav-tabs .active').text() || 1;
 
 function formatTunnelCommand(sourcePort, targetHostname, targetPort) {
     return "-L "+sourcePort+":"+targetHostname+":"+targetPort;
@@ -35,29 +36,38 @@ function formatSSHCommand(lookupTable, source) {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    chrome.storage.local.get(LOOKUP_TABLE, function(results) {
-        var lookupTable = results[LOOKUP_TABLE];
-        if (lookupTable) {
-            document.getElementById("generateSSHLocalCommands").addEventListener('click', function() {
-                const commandId = "sshCommands";
+    document.getElementById("generateSSHLocalCommands").addEventListener('click', function() {
+        const commandId = "sshCommands";
+        if (!document.getElementById(commandId)) { 
+            var command = document.createElement("div");
+            command.className = "boxed";
+            command.id = commandId;
 
-                if (!document.getElementById(commandId)) {
-                    var command = document.createElement("div");
-                    command.className = "boxed";
-                    command.id = commandId;
+            var title = document.createElement("b");
+            title.appendChild(document.createTextNode("SSH Command:"));
 
-                    var title = document.createElement("b");
-                    title.appendChild(document.createTextNode("SSH Command:"));
+            command.appendChild(title);
+            document.getElementById("currentTunnels").parentNode.appendChild(command);
+        }                
 
-                    var text = document.createElement("p");
-                    text.appendChild(document.createTextNode(formatSSHCommand(lookupTable, "localhost")));
+        chrome.storage.local.get(LOOKUP_TABLE, function(results) {
+            // Used to track which tab is currently selected
+            chrome.storage.local.get("activeTab", function(tabInfo) {
+                var profile = tabInfo["activeTab"] || 1;
 
-                    command.appendChild(title);
-                    command.appendChild(text);
-                    document.getElementById("currentTunnels").parentNode.appendChild(command);
+                var fullLookupTable = results[LOOKUP_TABLE];
+                if (fullLookupTable){
+                    var lookupTable = fullLookupTable[profile];
+
+                    if (lookupTable) {
+                        var text = document.createElement("p");
+                        text.appendChild(document.createTextNode(formatSSHCommand(lookupTable, "localhost")));
+                        
+                        document.getElementById(commandId).appendChild(text);
+                    }
                 }
             });
-        }
+        });
     });
 });
 
