@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Test Popup</title>
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css"/>
-    <link rel="stylesheet" href="tabs.css"/>
+  <meta charset="UTF-8">
+  <title>Test Popup</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="tabs.css"/>
 </head>
 <body>
 
 <div class="container">
   <div class="row">
-    <form id="newTunnel">
-        <label for="src">Source Host</label><input type="text" id="src"><br>
-        <label for="target">Target Host</label><input type="text" id="target"><br>
-        <br><input type="submit">
+    <form id="newTunnel" role="form">
+      <div class="form-group">
+        <label for="src">Source Host</label>
+        <input type="text" id="src" class="form-control">
+      </div>
+      
+      <div class="form-group">
+        <label for="target">Target Host</label>
+        <input type="text" id="target" class="form-control">
+      </div>
+    
+      <input class="btn-primary" type="submit">
     </form>
   </div>
+
+  <hr/>
 
   <div class="row">
     <div class="col-xs-12">

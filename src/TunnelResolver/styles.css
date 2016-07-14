@@ -5,12 +5,7 @@ body {
 }
 
 label {
-    width:70px;
     display:inline-block;
-}
-
-input {
-    margin-left:20px;
 }
 
 ul {
@@ -33,4 +28,32 @@ li button {
 
 b {
     padding-left: 5px;
+}
+
+hr {
+    display: block;
+    height: 2px;
+    border: 0;
+    border-top: 2px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+form {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    overflow: hidden; /* keeps the floated child elements inside the form element */
+}
+
+.form-group {
+    
+}
+
+#newTunnel {
+    margin-top: 10px;
+}
+
+form input[type="submit"] {
+    float: right;
 }
