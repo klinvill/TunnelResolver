@@ -11,6 +11,10 @@
 <body>
 
 <div class="container">
+  <!-- <div class="row title-container">
+    <h3 class="title">Tunnel Resolver</h3>
+  </div> -->
+
   <div class="row">
     <form id="newTunnel" role="form">
       <div class="form-group">
@@ -23,71 +27,43 @@
         <input type="text" id="target" class="form-control">
       </div>
     
-      <input class="btn-primary" type="submit">
+      <input class="btn btn-info" type="submit" label="Add Tunnel" value="Add Tunnel">
     </form>
   </div>
 
   <hr/>
 
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-12" id="currentTunnelsContainer">
       <div class="tabs-right">
-        <ul class="nav nav-tabs col-xs-3" id="profiles">
-          <!-- <li><a href="#a" data-toggle="tab">11</a></li>
-          <li><a href="#b" data-toggle="tab">12</a></li> -->
-          <li id="newProfile"><span class="glyphicon glyphicon-plus"></span></li>
+        <ul class="nav nav-tabs col-xs-1" id="profiles">
+          <li id="newProfile"><a class="glyphicon glyphicon-plus"></a></li>
         </ul>
 
-
-        <div class="tab-content col-xs-9" id="currentTunnels">
-          <b>Current tunnels:</b>
-          <!-- <div class="tab-pane active" id="a">
-            <ul id="tunnels"></ul>
-          </div>
-          <div class="tab-pane" id="b">
-          <h3>What's your Favorite?</h3>
-          <ul class="list-group pull-left">
-            <li class="list-group-item">
-              <h4>Crystals &nbsp; &nbsp;<span class="badge pull-right">100%</span></h4>
-            </li>
-            <li class="list-group-item">
-              <h4>Healing &nbsp; &nbsp;<span class="badge pull-right">90%</span></h4>
-            </li>
-            <li class="list-group-item">
-              <h4>Exploring &nbsp; &nbsp;<span class="badge pull-right">78%</span></h4>
-            </li>
-            <li class="list-group-item">
-              <h4>QiGong &nbsp; &nbsp;<span class="badge pull-right">83%</span></h4>
-            </li>
-            <li class="list-group-item">
-              <h4>Myself &nbsp; &nbsp;<span class="badge pull-right">100%</span>
-              </h4></li>
-          </ul>
-          </div>
-          <div class="tab-pane" id="c">CCCCThirdamuno, ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae.</div>
-          <div class="tab-pane" id="d">DDDDDSecondo sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</div>
-          <div class="tab-pane" id="e">EEEEEThirdamuno, ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae.</div>
-          <div class="tab-pane" id="f">FFFFFFThirdamuno, ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae.</div> -->
+        <div class="tab-content col-xs-11" id="currentTunnels">
+          <h4>Current tunnels:</h4>
         </div><!-- /tab-content -->
       </div><!-- /tabbable -->
     </div><!-- /col -->
+
+    <button id="deleteProfile" class="btn btn-danger">delete profile</button>
+
   </div><!-- /row -->
+
+  <hr/>
+
+  <div class="row">
+    <div id="sshCommandsContainer">
+      <button id="generateSSHLocalCommands" class="btn btn-info">generate localhost SSH commands</button>
+    </div>
+  </div>
+
 </div><!-- /container -->
 
+  <script src="resources/js/jquery.min.js"></script>
+  <script src="resources/js/bootstrap.min.js"></script>
 
-
-    
-
-    <br>
-    
-
-    <br>
-    <button id="generateSSHLocalCommands">generate localhost SSH commands</button>
-
-    <script src="resources/js/jquery.min.js"></script>
-    <script src="resources/js/bootstrap.min.js"></script>
-
-    <script src="manageTunnels.js"></script>
-    <script src="generateTunnels.js"></script>
+  <script src="manageTunnels.js"></script>
+  <script src="generateTunnels.js"></script>
 </body>
 </html>

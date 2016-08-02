@@ -37,8 +37,10 @@ function formatSSHCommand(lookupTable, source) {
 
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("generateSSHLocalCommands").addEventListener('click', function() {
-        const commandId = "sshCommands";
+        
+        var commandId = "sshCommands";
         if (!document.getElementById(commandId)) { 
+
             var command = document.createElement("div");
             command.className = "boxed";
             command.id = commandId;
@@ -47,13 +49,14 @@ document.addEventListener('DOMContentLoaded', function() {
             title.appendChild(document.createTextNode("SSH Command:"));
 
             command.appendChild(title);
-            document.getElementById("currentTunnels").parentNode.appendChild(command);
+            var sshContainer = document.getElementById("sshCommandsContainer");
+            sshContainer.insertBefore(command, sshContainer.firstChild);
         }                
 
         chrome.storage.local.get(LOOKUP_TABLE, function(results) {
             // Used to track which tab is currently selected
             chrome.storage.local.get("activeTab", function(tabInfo) {
-                var profile = tabInfo["activeTab"] || 1;
+                var profile = tabInfo.activeTab || 1;
 
                 var fullLookupTable = results[LOOKUP_TABLE];
                 if (fullLookupTable){

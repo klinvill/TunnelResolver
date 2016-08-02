@@ -116,8 +116,15 @@ function createTunnelListItem(source, target) {
     newLi.appendChild(createTunnelText(source, target));
 
     // add a delete button for each listed tunnel
-    var deleteButton = document.createElement("button");
-    deleteButton.appendChild(document.createTextNode("delete"));
+    var deleteButton = document.createElement("span");
+    deleteButton.classList.add("glyphicon");
+    deleteButton.classList.add("glyphicon-remove");
+    deleteButton.addEventListener("mouseover", function(event) {
+        event.currentTarget.style.cursor="pointer";
+    });
+    deleteButton.addEventListener("mouseout", function(event) {
+        event.currentTarget.style.cursor="";
+    });
 
     // source is a mutable variable used throughout the loop so we need to create a local copy for the event listener callback
     (function (source) {
@@ -166,6 +173,25 @@ function addNewProfile() {
     });
 }
 
+function removeSelectedProfile() {
+    var profile = $('.nav-tabs .active').text();
+    removeProfile(profile);
+}
+
+function removeProfile(profile) {
+    chrome.storage.local.get(LOOKUP_TABLE, function(results) {
+        var fullLookupTable = results[LOOKUP_TABLE];
+        delete fullLookupTable[profile];
+        
+        // { LOOKUP_TABLE: val } will use LOOKUP_TABLE as the key instead of using the value of LOOKUP_TABLE as the key, so the workaround is to use object[LOOKUP_TABLE] = val
+        var storedTable = {};
+        storedTable[LOOKUP_TABLE] = fullLookupTable;
+        chrome.storage.local.set(storedTable);
+    });
+    
+    location.reload();
+}
+
 function trackActiveTab(profile) {
     chrome.storage.local.set({"activeTab": profile});
 }
@@ -201,4 +227,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("newProfile").onclick = addNewProfile;
 
     document.getElementById("newTunnel").addEventListener('submit', newTunnel);
+
+    document.getElementById("deleteProfile").onclick = removeSelectedProfile;
+
+
 });
